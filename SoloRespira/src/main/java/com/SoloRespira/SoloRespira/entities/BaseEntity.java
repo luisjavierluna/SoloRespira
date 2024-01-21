@@ -1,4 +1,4 @@
-package com.SoloRespira.SoloRespira.Entities;
+package com.SoloRespira.SoloRespira.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -20,8 +20,5 @@ public class BaseEntity {
     private LocalDate lastModified;
 
     private Boolean isDeleted;
-
-
-
 
 }

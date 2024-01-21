@@ -1,5 +1,8 @@
-package com.SoloRespira.SoloRespira.Entities;
+package com.SoloRespira.SoloRespira.entities;
 
+import com.SoloRespira.SoloRespira.entities.BaseEntity;
+import com.SoloRespira.SoloRespira.entities.Category;
+import com.SoloRespira.SoloRespira.entities.Product;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;

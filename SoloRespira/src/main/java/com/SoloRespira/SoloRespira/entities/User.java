@@ -1,5 +1,6 @@
-package com.SoloRespira.SoloRespira.Entities;
+package com.SoloRespira.SoloRespira.entities;
 
+import com.SoloRespira.SoloRespira.entities.Image;
 import com.SoloRespira.SoloRespira.enums.Role;
 import jakarta.persistence.*;
 import java.io.Serializable;

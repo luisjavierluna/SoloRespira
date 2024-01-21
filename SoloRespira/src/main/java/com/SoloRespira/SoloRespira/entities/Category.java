@@ -1,4 +1,4 @@
-package com.SoloRespira.SoloRespira.Entities;
+package com.SoloRespira.SoloRespira.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;

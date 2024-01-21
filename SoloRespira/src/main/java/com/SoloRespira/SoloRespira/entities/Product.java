@@ -1,5 +1,6 @@
-package com.SoloRespira.SoloRespira.Entities;
+package com.SoloRespira.SoloRespira.entities;
 
+import com.SoloRespira.SoloRespira.entities.*;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
