@@ -2,8 +2,8 @@ package com.SoloRespira.SoloRespira.Entities;
 
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.time.LocalDate;
+
 @MappedSuperclass
 @Data
 @AllArgsConstructor
@@ -20,8 +20,4 @@ public class BaseEntity {
     private LocalDate lastModified;
 
     private Boolean isDeleted;
-
-
-
-
 }

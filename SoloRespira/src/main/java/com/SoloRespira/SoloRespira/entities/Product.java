@@ -7,29 +7,27 @@ import jakarta.persistence.Table;
 import java.io.Serializable;
 import lombok.*;
 
-
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @EqualsAndHashCode(callSuper = true)
+// @Builder // https://github.com/mapstruct/mapstruct/issues/2115
 @Table()
 public class Product extends BaseEntity implements Serializable {
 
-    @OneToOne
-    private Image image;
     private Double price;
     private Double discount;
-    private Double finalPrice;
     private String description;
     private Double weight;
     private Double height;
     private Double width;
     private Double length;
-    private Integer initialPrice;
+    private Integer initialStock;
     private Integer soldUnits;
-    private Integer currentStock;
+    
+    @OneToOne
+    private Image image;
 
     @ManyToOne
     private Category category;
