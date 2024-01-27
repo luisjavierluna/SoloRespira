@@ -1,18 +1,18 @@
 package com.SoloRespira.SoloRespira.dtos;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductRequestDto {
     
-    @NotNull(message = "soldUnits must contain a value")
+    @NotBlank(message = "Name field must not be empty")
     private String name;
     
     @NotNull(message = "Price must contain a value")
@@ -23,6 +23,7 @@ public class ProductRequestDto {
     @Positive(message = "discount must be positive")
     private Double discount;
 
+    @NotBlank(message = "Name field must not be empty")
     private String description;
 
     @NotNull(message = "weight must contain a value")
@@ -48,12 +49,12 @@ public class ProductRequestDto {
     @Positive(message = "soldUnits must be positive")
     private Integer soldUnits;
     
-    @NotNull(message = "soldUnits must contain a value")
+    @NotBlank(message = "departmentId field must not be empty")
     private String departmentId;
 
-    @NotNull(message = "soldUnits must contain a value")
+    @NotBlank(message = "categoryId field must not be empty")
     private String categoryId;
     
-    @NotNull(message = "soldUnits must contain a value")
+    @NotBlank(message = "imageId field must not be empty")
     private String imageId;
 }
