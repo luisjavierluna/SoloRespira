@@ -2,8 +2,8 @@ package com.SoloRespira.SoloRespira.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.time.LocalDate;
+
 @MappedSuperclass
 @Data
 @AllArgsConstructor

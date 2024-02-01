@@ -8,7 +8,6 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.io.Serializable;
 import lombok.*;
-
 import java.util.List;
 
 @Entity
@@ -16,6 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
+//@Builder
 @Table
 public class Deparment extends BaseEntity implements Serializable {
 
@@ -26,5 +26,4 @@ public class Deparment extends BaseEntity implements Serializable {
 
     @OneToMany
     private List<Product> products;
-
 }

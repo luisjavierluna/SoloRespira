@@ -37,6 +37,4 @@ public class User implements Serializable {
     
     @OneToOne
     private Image image;
-
-
 }

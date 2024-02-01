@@ -11,17 +11,7 @@ import java.util.Optional;
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, String> {
 
-    Category save(Category category);
-
     //Buscar categoría por nombre
     Optional<Category> findByName(String name);
-
-    // Eliminar categoría por Id
-    void deleteById(String id);
-
-    // Listar las categorías
-    List<Category> findAll();
-
-
 
 }
