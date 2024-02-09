@@ -10,17 +10,22 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/product")
 public class ProductController {
     
     ProductService _productService;
@@ -46,8 +51,8 @@ public class ProductController {
     }
     
     // Create one product
-    @PostMapping
-    public ResponseEntity<MessageDto> createProduct(@RequestBody @Valid ProductRequestDto dto){
+    @PostMapping(value = "", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<MessageDto> createProduct(@ModelAttribute @Valid ProductRequestDto dto){
         try {
             return new ResponseEntity<>(_productService.createProduct(dto),HttpStatus.CREATED);
         } catch (Exception e) {
@@ -56,8 +61,8 @@ public class ProductController {
     }
 
     // Update one product
-    @PutMapping("/{id}")
-    public ResponseEntity<MessageDto> updateProduct(@RequestBody @Valid ProductRequestDto dto,@PathVariable String id){
+    @PutMapping(value =  "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<MessageDto> updateProduct(@ModelAttribute @Valid ProductRequestDto dto, @PathVariable String id){
         try {
             return new ResponseEntity<>(_productService.updateProduct(dto,id),HttpStatus.OK);
         } catch (GeneralException ex) {

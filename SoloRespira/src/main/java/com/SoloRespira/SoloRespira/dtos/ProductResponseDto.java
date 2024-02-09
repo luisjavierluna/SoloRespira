@@ -1,5 +1,6 @@
 package com.SoloRespira.SoloRespira.dtos;
 
+import com.SoloRespira.SoloRespira.Entities.Image;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,12 +23,13 @@ public class ProductResponseDto {
     private Integer initialStock;
     private Integer soldUnits;
     private Integer currentStock;
+    private Image image;
     private String departmentId;
     private String departmentName;
     private String categoryId;
     private String categoryName;
-    
-    public ProductResponseDto(String id, String name, Double price, Double discount, Double finalPrice, String description, Double weight, Double height, Double width, Double length, Integer initialStock, Integer soldUnits, Integer currentStock, String departmentId, String departmentName, String categoryId, String categoryName) {
+
+    public ProductResponseDto(String id, String name, Double price, Double discount, Double finalPrice, String description, Double weight, Double height, Double width, Double length, Integer initialStock, Integer soldUnits, Integer currentStock, Image image, String departmentId, String departmentName, String categoryId, String categoryName) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -41,11 +43,13 @@ public class ProductResponseDto {
         this.initialStock = initialStock;
         this.soldUnits = soldUnits;
         this.currentStock = this.initialStock - this.soldUnits;
+        this.image = image;
         this.departmentId = departmentId;
         this.departmentName = departmentName;
         this.categoryId = categoryId;
         this.categoryName = categoryName;
     }
+    
 }
 
 

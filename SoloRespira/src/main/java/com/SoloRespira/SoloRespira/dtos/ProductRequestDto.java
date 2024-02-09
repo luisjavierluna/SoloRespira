@@ -1,11 +1,13 @@
 package com.SoloRespira.SoloRespira.dtos;
 
+import com.SoloRespira.SoloRespira.Entities.Image;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 @Data
 @AllArgsConstructor
@@ -50,11 +52,12 @@ public class ProductRequestDto {
     private Integer soldUnits;
     
     @NotBlank(message = "departmentId field must not be empty")
-    private String departmentId;
+    private String departmentId; 
 
     @NotBlank(message = "categoryId field must not be empty")
     private String categoryId;
     
-    @NotBlank(message = "imageId field must not be empty")
-    private String imageId;
+    private MultipartFile image;
+    
+    // private Image image;
 }

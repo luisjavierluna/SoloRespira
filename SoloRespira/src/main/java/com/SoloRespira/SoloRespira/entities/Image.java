@@ -1,6 +1,7 @@
 package com.SoloRespira.SoloRespira.Entities;
 
 import jakarta.persistence.Basic;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Lob;
@@ -23,5 +24,6 @@ public class Image extends BaseEntity implements Serializable {
 
     private String mime;
     @Lob @Basic(fetch = FetchType.LAZY)
-    private Byte[] content;
+    @Column(columnDefinition = "longblob")
+    private byte[] content;
 }

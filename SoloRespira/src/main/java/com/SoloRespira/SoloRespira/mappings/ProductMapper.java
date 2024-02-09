@@ -21,7 +21,8 @@ public interface ProductMapper {
         @Mapping(source = "deparment.id", target = "departmentId"),
         @Mapping(source = "deparment.name", target = "departmentName"),
         @Mapping(source = "category.id", target = "categoryId"),
-        @Mapping(source = "category.name", target = "categoryName")
+        @Mapping(source = "category.name", target = "categoryName"),
+        @Mapping(target = "image", ignore = true) // Ignorado temporalmente ya que estorba al visualizar la data
     })
     ProductResponseDto toResponseDTO(Product product);
     

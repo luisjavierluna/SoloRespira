@@ -1,5 +1,7 @@
 package com.SoloRespira.SoloRespira.services;
 
+import com.SoloRespira.SoloRespira.Entities.BaseEntity;
+import com.SoloRespira.SoloRespira.Entities.Image;
 import com.SoloRespira.SoloRespira.Entities.Product;
 import com.SoloRespira.SoloRespira.dtos.MessageDto;
 import com.SoloRespira.SoloRespira.dtos.ProductRequestDto;
@@ -17,19 +19,27 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class ProductService {
 
     ProductRepository _productRepository;
     ProductMapper _mapper;
+    ImageService _imageService;
+    GeneralApiService _apiService;
    
+    @Autowired
     public ProductService(
             ProductRepository productRepository,
-            ProductMapper mapper) {
+            ProductMapper mapper,
+            ImageService imageService,
+            GeneralApiService apiService) {
         
         _productRepository = productRepository;
         _mapper = mapper;
+        _imageService = imageService;
+        _apiService = apiService;
     }
 
     //READ
@@ -42,6 +52,7 @@ public class ProductService {
         return productsDTO;
     }
     
+    // READ
     public ProductResponseDto getProductById(String id) throws GeneralException{
         Optional<Product> optionalProduct = _productRepository.findById(id);
         
@@ -58,23 +69,21 @@ public class ProductService {
     
     //CREATE
     @Transactional
-    public MessageDto createProduct(ProductRequestDto dto){        
+    public MessageDto createProduct(ProductRequestDto dto) throws GeneralException{        
         Product product = _mapper.toProduct(dto);
-        
-        // Attributos incompletos
-        product.setCreatedBy("Admin 1"); // Se necesita configurar la seguridad web
-        product.setCreated(LocalDate.now());
-        product.setLastModifiedBy("Admin 1"); // Se necesita configurar la seguridad web
-        product.setLastModified(LocalDate.now());
-        product.setIsDeleted(false);
-        
+                
+        product = (Product) _apiService.insertTrackingData((BaseEntity) product);
+                
         // Attributos pendientes, se necesitan los CRUD's de Departments, Images y Categories
 //        product.setDeparment(department);
-//        product.setImage(category);
 //        product.setCategory(category);
+
+        Image image = _imageService.save(dto.getImage());
+
+        product.setImage(image);
         
         _productRepository.save(product);
-        return new MessageDto("Producto "+product.getDescription()+" creado");
+        return new MessageDto("Producto "+product.getName()+" creado");
     }
     
     //UPDATE
@@ -86,9 +95,8 @@ public class ProductService {
         
         if (optionalProduct.isPresent()){
             product = optionalProduct.get();
-
-            product.setLastModifiedBy("Admin 1"); // Se necesita configurar la seguridad web
-            product.setLastModified(LocalDate.now());
+            
+            product = (Product) _apiService.updateTrackingData((BaseEntity) product);
             
             product.setName(dto.getName());
             product.setPrice(dto.getPrice());
@@ -103,8 +111,9 @@ public class ProductService {
             
             // Attributos pendientes, se necesitan los CRUD's de Departments, Images y Categories
 //            product.setDeparment(department);
-//            product.setImage(category);
 //            product.setCategory(category);
+            
+            _imageService.update(dto.getImage(), product.getImage().getId());
             
             _productRepository.save(product);
             
@@ -124,9 +133,11 @@ public class ProductService {
         if (optionalProduct.isPresent()){
             product = optionalProduct.get();
             
-            product.setLastModifiedBy("Admin 1"); // Se necesita configurar la seguridad web
-            product.setLastModified(LocalDate.now());
+            product = (Product) _apiService.updateTrackingData((BaseEntity) product);
+            
             product.setIsDeleted(true);
+            
+            _imageService.delete(product.getImage().getId());
             
             _productRepository.save(product);
         }else{
